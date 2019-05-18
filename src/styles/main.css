@@ -1,0 +1,42 @@
+h1 {
+  text-align: center;
+}
+
+#btn-container {
+  width: 16%;
+  margin: 0 auto;
+}
+
+table {
+  top: 10%;
+  left: 10px;
+  height: 600px;
+  width: 600px;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td {
+  width: 10px;
+  height: 10px;
+  border: solid #ddd 1px;
+}
+
+#prediction {
+  display: block;
+  width: 1em;
+  font-size: 40px;
+  margin: 20px auto;
+  padding: 1.5em;
+  border: solid black 2px;
+}
+
+#status {
+  text-align: center;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+#progress {
+  text-align: center;
+}

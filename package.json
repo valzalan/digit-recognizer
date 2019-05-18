@@ -1,0 +1,32 @@
+{
+  "name": "digit-recognizer",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Zalán Valkó",
+  "main": "./src/scripts/index.js",
+  "license": "ISC",
+  "engines": {
+    "node": ">=8.5.0"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^1.1.2",
+    "acorn": "^6.1.1",
+    "rollup": "^1.12.2",
+    "ws": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-butternut": "^1.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulplog": "^1.0.0",
+    "webpack": "^4.31.0",
+    "webpack-stream": "^5.2.1",
+    "yargs": "^13.2.4"
+  }
+}

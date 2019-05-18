@@ -57,12 +57,23 @@ function js(callB) {
 }
 
 function css(callB) {
-    if ( MODE == "development" ) {
-        return src( "src/styles/main.css" )
-            .pipe( dest( "dist/public/styles" ));
-    } else if ( MODE == "production" ) {
-        return src( "src/styles/main.css" )
-            .pipe( dest( "dist/public/styles" ));
+    if( MODE == "development" ) {
+        return src( "./src/styles/**/*.scss" )
+            .pipe( sourcemaps.init() )
+            .pipe( sass()
+            .on( "error", sass.logError ))
+            .pipe( sourcemaps.write( "./" ))
+            .pipe( dest( "./dist/public/styles/" ));
+    } else if( MODE == "production" ) {
+        return src( "./src/styles/**/*.scss" )
+            .pipe( sass( {
+                outputStyle: "compressed"
+            }).on( "error", sass.logError ))
+            .pipe( autoprefixer( {
+                browsers: [ "last 2 versions" ],
+                cascade: false
+            }))
+            .pipe( dest( "./dist/public/styles/" ));
     }
     callB(new Error("Unknown MODE"));
 }

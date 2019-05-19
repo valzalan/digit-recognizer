@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 100%;
+  text-decoration: none;
+  z-index: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input, textarea, button {
+  outline: none;
+}
+
+th {
+  text-align: inherit;
+}

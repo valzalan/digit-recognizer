@@ -45,7 +45,7 @@ function js(callB) {
         return src( "./src/scripts/*.js" )
             .pipe( webpackStream( webpackConfig ), webpack )
             .pipe( babel({
-                presets: ['@babel/preset-env']
+                presets: ['@babel/env']
             }))
             .pipe( butternut({
                 allowDangerousEval: true

@@ -1,9 +1,14 @@
-const model = require("./model.js"),
-      canvasDrawer = require("./drawer.js");
+const ReactDom = require("react-dom"),
+      React = require("react");
+      //model = require("./model.js"),
+      //canvasDrawer = require("./drawer.js");
 
+const container = document.getElementById("dashboard");
+ReactDom.render(<p>Hello World!</p>, container);
+
+/*
 let canvas = document.getElementById("drawer");
-canvas.addEventListener("mousedown", function(e){
-    console.log("mousedown");
+    canvas.addEventListener("mousedown", function(e){
     canvasDrawer.isPainting = true;
     canvasDrawer.recordCursorPos(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
     canvasDrawer.draw(canvas.getContext("2d"));
@@ -11,10 +16,6 @@ canvas.addEventListener("mousedown", function(e){
 
 canvas.addEventListener("mousemove", function(e){
     if(canvasDrawer.isPainting) {
-        console.log("e.pageX: " + e.pageX);
-        console.log("e.pageY: " + e.pageY);
-        console.log("this.offsetLeft: " + this.offsetLeft);
-        console.log("this.offsetTop: " + this.offsetTop);
         canvasDrawer.recordCursorPos(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
         canvasDrawer.draw(canvas.getContext("2d"));
     }
@@ -27,7 +28,7 @@ canvas.addEventListener("mouseup", function(e){
 canvas.addEventListener("mouseleave", function(e){
     canvasDrawer.isPainting = false;
 });
-
+*/
 /*setTrainButtonCallback(async () => {
   setStatus("Loading MNIST data...");
   await load();

@@ -1,28 +1,21 @@
-//---------------
-//    Imports
-//---------------
-
 const { src, dest, parallel, series, watch } = require('gulp');
 
-//    HTML Minify
-const htmlmin = require("gulp-htmlmin");
-
-//    JavaScript bundling
 const webpack = require( "webpack" );
       babel = require( "gulp-babel" ),
       butternut = require( "gulp-butternut" );
 
-//    Utilities
+const sass = require( "gulp-sass" ),
+      autoprefixer = require( "gulp-autoprefixer" );
+
+const htmlmin = require("gulp-htmlmin");
+
 const sourcemaps = require( "gulp-sourcemaps" ),
       log = require( "gulplog" ),
       webpackStream = require( "webpack-stream" ),
       webpackConfig = require( "./webpack.config.js" ),
       argv = require( "yargs" ).argv;
 
-//    Css pre and postprocessing
-const sass = require( "gulp-sass" ),
-      autoprefixer = require( "gulp-autoprefixer" );
-
+const PUBLIC_PATH = "./dist/public/";
 const MODE = ( argv.production === undefined ) ? "development" : "production";
 
 (function setWebpackMode() {
@@ -38,20 +31,19 @@ function js(callB) {
         return src( "./src/scripts/*.js" )
             .pipe( webpackStream( webpackConfig ), webpack )
             .pipe( sourcemaps.init( { loadMaps: true } ))
+            .pipe( babel())
             .on( "error", console.error.bind( console ))
             .pipe( sourcemaps.write( "./" ))
-            .pipe( dest( "./dist/public/scripts/" ));
+            .pipe( dest( PUBLIC_PATH + "scripts/" ));
     } else if( MODE == "production" ) {
         return src( "./src/scripts/*.js" )
             .pipe( webpackStream( webpackConfig ), webpack )
-            .pipe( babel({
-                presets: ['@babel/env']
-            }))
+            .pipe( babel())
             .pipe( butternut({
                 allowDangerousEval: true
             }) )
             .on( "error", console.error.bind( console ))
-            .pipe( dest( "./dist/public/scripts/" ));
+            .pipe( dest( PUBLIC_PATH + "scripts/" ));
     }
     callB(new Error("Unknown MODE"));
 }
@@ -63,7 +55,7 @@ function css(callB) {
             .pipe( sass()
             .on( "error", sass.logError ))
             .pipe( sourcemaps.write( "./" ))
-            .pipe( dest( "./dist/public/styles/" ));
+            .pipe( dest( PUBLIC_PATH + "styles/" ));
     } else if( MODE == "production" ) {
         return src( "./src/styles/**/*.scss" )
             .pipe( sass( {
@@ -73,7 +65,7 @@ function css(callB) {
                 browsers: [ "last 2 versions" ],
                 cascade: false
             }))
-            .pipe( dest( "./dist/public/styles/" ));
+            .pipe( dest( PUBLIC_PATH + "styles/" ));
     }
     callB(new Error("Unknown MODE"));
 }
@@ -81,7 +73,7 @@ function css(callB) {
 function html(callB) {
     if ( MODE == "development" ) {
         return src( "src/index.html" )
-            .pipe( dest( "dist" ));
+            .pipe( dest( PUBLIC_PATH ));
     } else if ( MODE == "production" ) {
         return src( "src/index.html" )
             .pipe( htmlmin({
@@ -89,14 +81,10 @@ function html(callB) {
                 removeComments: true,
                 minifyJs: true
             }))
-            .pipe( dest( "dist" ));
+            .pipe( dest( PUBLIC_PATH ));
     }
     callB(new Error("Unknown MODE"));
 }
-
-//-------------------
-//    Watch tasks
-//-------------------
 
 function watchJs() {
     return watch( "./src/scripts/**/*.js", js );
@@ -109,10 +97,6 @@ function watchCss() {
 function watchHtml() {
     return watch( "./src/index.html", html );
 }
-
-//---------------
-//    Exports
-//---------------
 
 module.exports = {
     watch: parallel( watchHtml, watchJs, watchCss ),

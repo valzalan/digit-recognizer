@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "^1.1.2",
-    "acorn": "^6.1.1",
+    "acorn": "^6.4.1",
     "express": "^4.17.0",
     "rollup": "^1.12.2",
     "ws": "^7.0.0"

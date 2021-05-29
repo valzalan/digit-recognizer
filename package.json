@@ -13,7 +13,7 @@
     "acorn": "^6.1.1",
     "express": "^4.17.0",
     "rollup": "^1.12.2",
-    "ws": "^7.0.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
